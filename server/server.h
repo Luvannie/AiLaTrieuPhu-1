@@ -581,7 +581,6 @@ int handle_play_game(Message msg, int conn_fd, Question *questions, int level)
           msg.type = CORRECT_ANSWER;
           send(conn_fd, &msg, sizeof(msg), 0);
           printf("[%d]: Correct answer question %d\n", conn_fd, level - 1);
-          
         }
       }
       else
