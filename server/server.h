@@ -545,11 +545,13 @@ int change_password(char username[], char new_password[])
   return re;
 }
 
-int handle_play_game(Message msg,int conn_fd, Question *questions, int level){
-    char str[100];
+int handle_play_game(Message msg, int conn_fd, Question *questions, int level)
+{
+  char str[100];
+  int result = 1;
 
-    switch (msg.type)
-    {
+  switch (msg.type)
+  {
     case OVER_TIME:
       msg.type = OVER_TIME;
       send(conn_fd, &msg, sizeof(msg), 0);
@@ -572,11 +574,11 @@ int handle_play_game(Message msg,int conn_fd, Question *questions, int level){
           send(conn_fd, &msg, sizeof(msg), 0);
           printf("[%d]: Win\n", conn_fd);
         }
-        else{
+        else {
           msg.type = CORRECT_ANSWER;
           send(conn_fd, &msg, sizeof(msg), 0);
           printf("[%d]: Correct answer question %d\n", conn_fd, level - 1);
-          return 0;
+          
         }
       }
       else
@@ -587,6 +589,7 @@ int handle_play_game(Message msg,int conn_fd, Question *questions, int level){
         strcpy(msg.value, str);
         send(conn_fd, &msg, sizeof(msg), 0);
         printf("[%d]: Lose\n", conn_fd);
+        result = 0;
       }
       break;
     case FIFTY_FIFTY:
@@ -600,12 +603,13 @@ int handle_play_game(Message msg,int conn_fd, Question *questions, int level){
       break;
     case CHANGE_QUESTION:
       help(CHANGE_QUESTION, questions, level, conn_fd);
+      result = -1; // Trả về -1 để chỉ định rằng câu hỏi đã thay đổi
       break;
     default:
       break;
-    }
+  }
 
-    return 1;
+  return result;
 }
 
 int handle_play_alone(int conn_fd)
@@ -614,11 +618,10 @@ int handle_play_alone(int conn_fd)
   Question questions = get_questions();
   char str[100];
   int level = 0;
-  int re;
+  int result = 1;
 
   while (level < 15)
   {
-  initQuestion:
     msg.type = QUESTION;
     sprintf(str, "%d", level + 1);
     strcpy(msg.value, str);
@@ -635,33 +638,40 @@ int handle_play_alone(int conn_fd)
     send(conn_fd, &msg, sizeof(msg), 0);
     level++;
 
-  recvLabel:
     recv(conn_fd, &msg, sizeof(msg), 0);
 
     switch (msg.type)
     {
-    case OVER_TIME:
-    case STOP_GAME:
-      handle_play_game(msg, conn_fd, &questions, level);
-      return 0;
-    case CHOICE_ANSWER:
-      re = handle_play_game(msg, conn_fd, &questions, level);
-      if(re == 0) continue;
-      break;
-    case FIFTY_FIFTY:
-    case CALL_PHONE:
-    case VOTE:
-      handle_play_game(msg, conn_fd, &questions, level);
-      msg.type = -1;
-      goto recvLabel;
-    case CHANGE_QUESTION:
-      handle_play_game(msg, conn_fd, &questions, level);
-      level--;
-      goto initQuestion;
-    default:
-      break;
+      case OVER_TIME:
+      case STOP_GAME:
+        result = handle_play_game(msg, conn_fd, &questions, level);
+        return 0;
+      case CHOICE_ANSWER:
+        result = handle_play_game(msg, conn_fd, &questions, level);
+        if (result != 0)
+          break;
+        return 0;
+      case FIFTY_FIFTY:
+      case CALL_PHONE:
+      case VOTE:
+        handle_play_game(msg, conn_fd, &questions, level);
+        msg.type = -1;
+        break;
+      case CHANGE_QUESTION:
+        result = handle_play_game(msg, conn_fd, &questions, level);
+        if (result == -1)
+        {
+          level = 0; // Đặt lại level về 0 để trở về câu hỏi mới
+          questions = get_questions(); // Lấy câu hỏi mới
+          break;
+        }
+        level--;
+        break;
+      default:
+        break;
     }
   }
+
   return 1;
 }
 
