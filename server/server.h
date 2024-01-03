@@ -640,7 +640,7 @@ int handle_play_alone(int conn_fd)
     strcat(msg.value, questions.d[level]);
     send(conn_fd, &msg, sizeof(msg), 0);
     level++;
-
+  recvLabel:
     recv(conn_fd, &msg, sizeof(msg), 0);
 
     switch (msg.type)
@@ -657,9 +657,9 @@ int handle_play_alone(int conn_fd)
       case FIFTY_FIFTY:
       case CALL_PHONE:
       case VOTE:
-        handle_play_game(msg, conn_fd, &questions, level);
-        msg.type = -1;
-        break;
+         handle_play_game(msg, conn_fd, &questions, level);
+          msg.type = -1;
+          goto recvLabel;
       case CHANGE_QUESTION:
         result = handle_play_game(msg, conn_fd, &questions, level);
         if (result == -1)
