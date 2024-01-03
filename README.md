@@ -37,7 +37,7 @@ sudo apt-get install qml-module-qtmultimedia
 ##### _1. Clone Project_ #####
 
 ```sh
-git clone https://github.com/tuyenldhust/AiLaTrieuPhu.git
+git clone https://github.com/Luvannie/AiLaTrieuPhu-1.git
 cd AiLaTrieuPhu
 ```
 
