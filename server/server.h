@@ -942,6 +942,9 @@ void *thread_start(void *client_fd)
       case LOGOUT:
         printf("[%d]: Bye %s\n", conn_fd, cli->login_account);
         cli->login_status = UN_AUTH;
+        close(conn_fd);
+        delete_client(conn_fd);
+        pthread_exit(NULL);
         break;
       }
       break;
