@@ -32,7 +32,7 @@ sudo apt-get install qml-module-qtquick-dialogs
 sudo apt-get install qml-module-qtmultimedia
 
 ```
-## de kiem tra cac module da duoc cai dat chua, co the vao truy capj vao Files->Other locations->Computer->usr->lib->x86_64-linux-gnu->qt5->qml
+## để kiểm tra các module đã được cài đặt hay chưa, có thể truy cập vào Files->Other locations->Computer->usr->lib->x86_64-linux-gnu->qt5->qml
 ## Run Project
 ##### _1. Clone Project_ #####
 
