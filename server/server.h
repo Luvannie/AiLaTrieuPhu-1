@@ -513,38 +513,41 @@ int signup(char username[], char password[])
   return re;
 }
 
-int change_password(char username[], char new_password[])
-{
+
+int change_password(char username[], char new_password[]) {
   MYSQL_RES *res;
   MYSQL_ROW row;
 
   char query[100];
   int re;
 
+  printf("Username: %s\n", username);
+  printf("New password: %s\n", new_password);
+
+  // Loại bỏ hai ký tự đầu của mật khẩu đã mã hóa
+  char modified_password[strlen(new_password) - 2 + 1];
+  strcpy(modified_password, new_password + 2);
+
   sprintf(query, "SELECT * FROM account WHERE username = '%s'", username);
   execute_query(query);
   res = mysql_use_result(conn);
-  if ((row = mysql_fetch_row(res)) != NULL)
-  {
-    if (strcmp(row[2], new_password) == 0)
-    {
+  if ((row = mysql_fetch_row(res)) != NULL) {
+    if (strcmp(row[2], modified_password) == 0) {
       re = SAME_OLD_PASSWORD;
-    }
-    else {
+    } else {
       mysql_free_result(res);
-      sprintf(query, "UPDATE account SET password = '%s' WHERE username = '%s'", new_password, username);
+      sprintf(query, "UPDATE account SET password = '%s' WHERE username = '%s'", modified_password, username);
       execute_query(query);
       res = mysql_use_result(conn);
       re = CHANGE_PASSWORD_SUCCESS;
     }
-  }
-  else
+  } else {
     re = ACCOUNT_NOT_EXIST;
+  }
 
   mysql_free_result(res);
   return re;
 }
-
 int handle_play_game(Message msg, int conn_fd, Question *questions, int level)
 {
   char str[100];
