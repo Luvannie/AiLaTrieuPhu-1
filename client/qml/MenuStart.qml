@@ -97,10 +97,10 @@ Page{
 
       Text{
         id: contentCredit1
-        text: "<h3><font color='#148F77'><i>1. Lê Đình Tuyên</i></font></h3>
-        <b>Github</b>:   <a href='https://github.com/tuyenldhust'>https://github.com/tuyenldhust</a>
+        text: "<h3><font color='#148F77'><i>1 Nguyễn Nhật Anh </i></font></h3>
+        <b>Github</b>:   <a href='https://github.com/Luvannie'>https://github.com/Luvannie</a>
         <br>
-        <b>Facebook</b>: <a href='https://www.facebook.com/le.tuyen.hust'>https://www.facebook.com/le.tuyen.hust</a>"
+        <b>Facebook</b>: <a href='https://www.facebook.com/nhatanh.nguyen.00'>https://www.facebook.com/nhatanh.nguyen.00</a>"
         font.family: "Times New Roman"
         font.pointSize: 12
         anchors.top: titleCredit.bottom
@@ -111,10 +111,10 @@ Page{
 
       Text{
         id: contentCredit2
-        text: "<h3><font color='#148F77'><i>2. Phạm Thị Ánh</i></font></h3>
-        <b>Github</b>: <a href='https://github.com/Anhpham2802'>https://github.com/Anhpham2802</a>
+        text: "<h3><font color='#148F77'><i>2. Lê Trường Lam</i></font></h3>
+        <b>Github</b>: <a href='https://github.com/LeTruongLam'>https://github.com/LeTruongLam</a>
         <br>
-        <b>Facebook</b>: <a href='https://www.facebook.com/PhamAnh2802'>https://www.facebook.com/PhamAnh2802</a>"
+        <b>Facebook</b>: <a href='https://www.facebook.com/nhobe.cau.1'>https://www.facebook.com/nhobe.cau.1</a>"
         font.family: "Times New Roman"
         font.pointSize: 12
         anchors.top: contentCredit1.bottom
@@ -125,10 +125,10 @@ Page{
 
       Text{
         id: contentCredit3
-        text: "<h3><font color='#148F77'><i>3. Hà Văn Đức</i></font></h3>
-        <b>Github</b>: <a href='https://github.com/VanDucKun'>https://github.com/VanDucKun</a>
+        text: "<h3><font color='#148F77'><i>3. Vũ Tiến Dũng</i></font></h3>
+        <b>Github</b>: <a href='https://github.com/DungVt-VN'>https://github.com/DungVt-VN</a>
         <br>
-        <b>Facebook</b>: <a href='https://www.facebook.com/100024461410153'>https://www.facebook.com/100024461410153</a>"
+        <b>Facebook</b>: <a href='https://www.facebook.com/tiendung.vu.775'>https://www.facebook.com/tiendung.vu.775</a>"
         font.family: "Times New Roman"
         font.pointSize: 12
         anchors.top: contentCredit2.bottom
