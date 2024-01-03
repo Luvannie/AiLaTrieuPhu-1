@@ -618,7 +618,7 @@ int handle_play_alone(int conn_fd)
 
   while (level < 15)
   {
-initQuestion:
+  initQuestion:
     msg.type = QUESTION;
     sprintf(str, "%d", level + 1);
     strcpy(msg.value, str);
@@ -635,7 +635,7 @@ initQuestion:
     send(conn_fd, &msg, sizeof(msg), 0);
     level++;
 
-recvLabel:
+  recvLabel:
     recv(conn_fd, &msg, sizeof(msg), 0);
 
     switch (msg.type)
