@@ -66,19 +66,12 @@ typedef struct _account
 } Account;
 
 /*--------------------- Function Declaration -------------------------*/
-// int is_number(const char *s);
-// int validate_ip(char *ip);
-// int menu_start();
-// int menu_not_login();
-// int menu_logged();
+
 int connect_to_server(char ip[], int port);
 int disconnect_to_server();
 int login(char username[], char password[]);
 int signup(char username[], char password[]);
 int logout();
 int change_password(char password[]);
-// int show_menu_not_login();
-// int show_menu_logged();
-// int play_alone();
-// int play_pvp();
+
 #endif /* CLIENT_H_ */
