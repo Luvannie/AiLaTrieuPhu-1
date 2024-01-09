@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Máy chủ: localhost
--- Thời gian đã tạo: Th2 11, 2023 lúc 03:40 PM
--- Phiên bản máy phục vụ: 8.0.32-0ubuntu0.20.04.2
--- Phiên bản PHP: 7.4.3-4ubuntu2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
